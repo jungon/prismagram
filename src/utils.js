@@ -1,7 +1,8 @@
-import { adjectives, nouns } from "./words";
-import nodemailer from "nodemailer";
-import sgTransport from "nodemailer-sendgrid-transport";
+import sgMail from "@sendgrid/mail";
 import jwt from "jsonwebtoken";
+import { adjectives, nouns } from "./words";
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export const generateSecret = () => {
   const randomNumber = Math.floor(Math.random() * adjectives.length);
@@ -9,21 +10,7 @@ export const generateSecret = () => {
 };
 
 const sendMail = email => {
-  const options = {
-    auth: {
-      api_user: process.env.SENDGRID_USERNAME,
-      api_key: process.env.SENDGRID_PASSWORD
-    }
-  };
-
-  const client = nodemailer.createTransport(sgTransport(options));
-  return client.sendMail(email, (err, info) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Message sent: " + info.response);
-    }
-  });
+  return sgMail.send(email);
 };
 
 export const sendSecretMail = (address, secret) => {
