@@ -34,6 +34,17 @@ export default {
           { post: { id: parentId } }
         ]
       });
-    }
+    },
+    likeCount: parent =>
+      prisma
+        .likesConnection({
+          where: {
+            post: {
+              id: parent.id
+            }
+          }
+        })
+        .aggregate()
+        .count()
   }
 };
