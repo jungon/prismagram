@@ -1,17 +1,16 @@
 export const COMMENT_FRAGMENT = `
-fragment CommentParts on Comment {
     id
     text
     user {
-        username
+        ${USER_FRAGMENT}
     }
-}`;
+`;
 
 export const USER_FRAGMENT = `
-fragment UserParts on User {
     id
-    username  
-}`;
+    username
+    avatar
+`;
 
 export const FILE_FRAGMENT = `
 fragment FileParts on File {
@@ -52,10 +51,24 @@ fragment PostParts on Post {
     }
 }`;
 
+export const MESSAGE_FRAGMENT = `
+    id
+    text
+    from {
+        ${USER_FRAGMENT}
+    }
+    to {
+        ${USER_FRAGMENT}
+    }
+`;
+
 export const ROOM_FRAGMENT = `
 fragment RoomParts on Room {
     id
     participants {
-        id
+        ${USER_FRAGMENT}
+    }
+    messages {
+        ${MESSAGE_FRAGMENT}
     }
 }`;

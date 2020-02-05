@@ -2,6 +2,7 @@ type User {
   id: ID! @id
   username: String! @unique
   email: String! @unique
+  avatar: String
   firstname: String @default(value: "")
   lastname: String @default(value: "")
   bio: String @default(value: "")

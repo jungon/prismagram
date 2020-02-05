@@ -2,6 +2,7 @@ type User {
   id: ID!
   username: String!
   email: String!
+  avatar: String
   firstname: String
   lastname: String
   fullname: String
