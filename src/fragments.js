@@ -1,11 +1,3 @@
-export const COMMENT_FRAGMENT = `
-    id
-    text
-    user {
-        ${USER_FRAGMENT}
-    }
-`;
-
 export const USER_FRAGMENT = `
     id
     username
@@ -26,28 +18,6 @@ fragment PostParts on Post {
     user {
         id
         username
-    }
-}`;
-
-export const FULL_POST_FRAGMENT = `
-fragment PostParts on Post {
-    id
-    location
-    caption
-    user {
-        id
-        username
-    }
-    files {
-        id
-        url
-    }
-    comments {
-        id
-        text
-        user {
-            username
-        }
     }
 }`;
 
