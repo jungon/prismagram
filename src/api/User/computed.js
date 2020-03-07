@@ -2,23 +2,14 @@ import { prisma } from "../../../generated/prisma-client";
 
 export default {
   User: {
-    fullname: parent => `${parent.lastname} ${parent.firstname}`,
-    isFollowing: (parent, _, { request }) => {
-      const { user } = request;
-      const { id: parentId } = parent;
-      try {
-        return prisma.$exists.user({
-          AND: [{ id: parentId }, { followers_some: { id_in: [user.id] } }]
-        });
-      } catch {
-        return false;
-      }
-    },
-    isSelf: (parent, _, { request }) => {
-      const { user } = request;
-      const { id: parentId } = parent;
-      return user.id === parentId;
-    }
+    posts: ({ id }) => prisma.user({ id }).posts(),
+    following: ({ id }) => prisma.user({ id }).following(),
+    followers: ({ id }) => prisma.user({ id }).followers(),
+    likes: ({ id }) => prisma.user({ id }).likes(),
+    comments: ({ id }) => prisma.user({ id }).comments(),
+    rooms: ({ id }) => prisma.user({ id }).rooms(),
+    followingCount: ({ id }) =>
+      prisma.usersConnection({ where: { followers_some: { id } } }).aggregate()
   },
   Post: {
     isLiked: (parent, _, { request }) => {
