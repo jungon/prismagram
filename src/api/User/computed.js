@@ -39,5 +39,8 @@ export default {
         .count(),
     files: parent => prisma.post({ id: parent.id }).files(),
     comments: parent => prisma.post({ id: parent.id }).comments()
+  },
+  Comment: {
+    user: ({ id }) => prisma.comment({ id }).user()
   }
 };
