@@ -10,17 +10,6 @@ fragment FileParts on File {
     username
 }`;
 
-export const POST_FRAGMENT = `
-fragment PostParts on Post {
-    id
-    location
-    caption
-    user {
-        id
-        username
-    }
-}`;
-
 export const MESSAGE_FRAGMENT = `
     id
     text

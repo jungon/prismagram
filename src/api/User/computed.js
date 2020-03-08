@@ -12,6 +12,7 @@ export default {
       prisma.usersConnection({ where: { followers_some: { id } } }).aggregate()
   },
   Post: {
+    user: ({ id }) => prisma.post({ id }).user(),
     isLiked: (parent, _, { request }) => {
       const { user } = request;
       const { id: parentId } = parent;
