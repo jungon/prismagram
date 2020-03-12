@@ -24,7 +24,7 @@ export default {
         .aggregate.count(),
     fullname: parent => `${parent.firstname} ${parent.lastname}`,
     isFollowing: (parent, _, { request }) => {
-      const { users } = request;
+      const { user } = request;
       const { id: parentId } = parent;
       try {
         return prisma.$exists.user({
