@@ -21,7 +21,8 @@ export default {
     followersCount: ({ id }) =>
       prisma
         .usersConnection({ where: { following_some: { id } } })
-        .aggregate.count(),
+        .aggregate()
+        .count(),
     fullname: parent => `${parent.firstname} ${parent.lastname}`,
     isFollowing: (parent, _, { request }) => {
       const { user } = request;
